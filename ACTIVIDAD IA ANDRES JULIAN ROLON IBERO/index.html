@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrendGear · Panel de clientes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="cog" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" fill="currentColor"/>
+        <path d="M12 1.5l1.2 2.4 2.6-.6 1 2.5 2.6.6-.3 2.7 2.1 1.6-1.4 2.3 1.4 2.3-2.1 1.6.3 2.7-2.6.6-1 2.5-2.6-.6L12 22.5l-1.2-2.4-2.6.6-1-2.5-2.6-.6.3-2.7-2.1-1.6 1.4-2.3-1.4-2.3 2.1-1.6-.3-2.7 2.6-.6 1-2.5 2.6.6L12 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none" opacity="0.55"/>
+      </svg>
+      <div>
+        <h1>TrendGear</h1>
+        <span class="brand-sub">Panel de clientes</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <span id="sync-status" class="sync-status">Conectando a Firebase…</span>
+      <button id="refresh-btn" class="btn-ghost" type="button">Actualizar</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section class="kpis" id="kpis" aria-label="Indicadores clave">
+      <div class="kpi-card">
+        <span class="kpi-label">Clientes totales</span>
+        <span class="kpi-value" id="kpi-total-clientes">—</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Ingresos totales</span>
+        <span class="kpi-value" id="kpi-ingresos">—</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Ticket promedio</span>
+        <span class="kpi-value" id="kpi-ticket">—</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Edad promedio</span>
+        <span class="kpi-value" id="kpi-edad">—</span>
+      </div>
+    </section>
+
+    <section class="panels">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Ingresos por ciudad</h2>
+          <span class="panel-sub">Suma de monto gastado</span>
+        </div>
+        <div id="city-chart" class="bar-chart" role="img" aria-label="Gráfico de ingresos por ciudad"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Nivel de membresía</h2>
+          <span class="panel-sub">Distribución de clientes</span>
+        </div>
+        <div id="tier-chart" class="tier-chart"></div>
+      </div>
+    </section>
+
+    <section class="panel table-panel">
+      <div class="panel-head table-head">
+        <div>
+          <h2>Clientes</h2>
+          <span class="panel-sub" id="table-count">—</span>
+        </div>
+        <div class="table-controls">
+          <input type="search" id="search-input" placeholder="Buscar por nombre, correo o ciudad…" aria-label="Buscar clientes">
+          <select id="tier-filter" aria-label="Filtrar por membresía">
+            <option value="">Todas las membresías</option>
+            <option value="Bronze">Bronze</option>
+            <option value="Silver">Silver</option>
+            <option value="Gold">Gold</option>
+            <option value="Platinum">Platinum</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table id="clients-table">
+          <thead>
+            <tr>
+              <th data-key="Customer ID">ID</th>
+              <th data-key="Name">Nombre</th>
+              <th data-key="Email">Correo</th>
+              <th data-key="Product Purchased">Producto</th>
+              <th data-key="Purchase Date">Fecha compra</th>
+              <th data-key="Amount Spent" class="num">Monto</th>
+              <th data-key="Age" class="num">Edad</th>
+              <th data-key="City">Ciudad</th>
+              <th data-key="Payment Method">Pago</th>
+              <th data-key="Last Login Date">Último ingreso</th>
+              <th data-key="Membership Status">Membresía</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr><td colspan="11" class="empty-row">Cargando datos…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="page-footer">
+    <span>TrendGear Dashboard · datos sincronizados con Firebase Realtime Database</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
